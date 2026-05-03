@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 # description of function arguments
-# state: list of 14 booleans, stating if we already have a score on that position
+# state: list of 13 booleans, stating if we already have a score on that position
 # true is a free space
 # dices: the 5 dices with values from 1-6
 # freeDices: list of 5 boolean values

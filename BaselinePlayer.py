@@ -20,7 +20,7 @@ class BaselinePlayer(Player):
     def chooseCombination(self, state: list[bool], dices: list[int]) -> int:
         max = -1
         bestChoice = None
-        for i in range(14):
+        for i in range(13):
             if state[i]:
                 score = self.calcScore(i, dices)
                 if score > max:
