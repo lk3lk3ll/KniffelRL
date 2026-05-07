@@ -1,9 +1,37 @@
 import random
+from operator import ifloordiv
 
-for step in range(14):
-    dices = []
-    for i in range(5):
-        dice = random.randint(1, 6)
-        dices.append(dice)
-    print(dices)
+from Player import Player
+from BaselinePlayer import BaselinePlayer
+from CalcScore import calcScore, CombinationCount
 
+
+def PrintGame(player: Player):
+    state = [True for i in range(CombinationCount)]
+    score = [0 for i in range(CombinationCount)]
+    for step in range(CombinationCount):
+        dices = [random.randint(1, 6) for i in range(5)]
+        print("Step ", (step + 1), ", dices=", dices)
+        rethrow1 = player.chooseDice1(state, dices)
+        print("Step ", (step + 1), ", rethrow1=", rethrow1)
+        for i in range(5):
+            if rethrow1[i]:
+                dices[i] = random.randint(1, 6)
+        print("Step ", (step + 1), ", dices=", dices)
+        rethrow2 = player.chooseDice2(state, dices, rethrow1)
+        print("Step ", (step + 1), ", rethrow2=", rethrow2)
+        for i in range(5):
+            if rethrow2[i]:
+                if not rethrow1[i]:
+                    raise RuntimeError("Invalid action")
+                dices[i] = random.randint(1, 6)
+        print("Step ", (step + 1), ", dices=", dices)
+        comb = player.chooseCombination(state, dices)
+        if not state[comb]:
+            raise RuntimeError("Invalid action")
+        state[comb] = False
+        score[comb] = calcScore(comb, dices)
+        print("Combination ", comb, ", score=", score[comb])
+
+
+PrintGame(BaselinePlayer())

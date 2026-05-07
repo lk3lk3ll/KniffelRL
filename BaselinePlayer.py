@@ -1,6 +1,7 @@
 import random
 
 from Player import Player
+from CalcScore import calcScore
 
 class BaselinePlayer(Player):
     prob = 0.1
@@ -10,19 +11,21 @@ class BaselinePlayer(Player):
         for i in range(5):
             rethrow = random.random() < self.prob
             ret.append(rethrow)
+        return ret
 
     def chooseDice2(self, state: list[bool], dices: list[int], freeDices: list[bool]) -> list[bool]:
         ret = []
         for i in range(5):
             rethrow = freeDices[i] and random.random() < self.prob
             ret.append(rethrow)
+        return ret
 
     def chooseCombination(self, state: list[bool], dices: list[int]) -> int:
         max = -1
         bestChoice = None
         for i in range(13):
             if state[i]:
-                score = self.calcScore(i, dices)
+                score = calcScore(i, dices)
                 if score > max:
                     max = score
                     bestChoice = i
