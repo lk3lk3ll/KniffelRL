@@ -5,6 +5,16 @@ from Player import Player
 from BaselinePlayer import BaselinePlayer
 from CalcScore import calcScore, CombinationCount
 
+def calcTotalScore(scores):
+    total = 0
+    for i in range(6):
+        total += scores[i]
+    if total >= 63:
+        total += 35
+    for i in range(6,13):
+        total += scores[i]
+    return total
+
 
 def PrintGame(player: Player):
     state = [True for i in range(CombinationCount)]
@@ -32,6 +42,8 @@ def PrintGame(player: Player):
         state[comb] = False
         score[comb] = calcScore(comb, dices)
         print("Combination ", comb, ", score=", score[comb])
-
+    total = calcTotalScore(score)
+    print("Total score=", total)
+    return total
 
 PrintGame(BaselinePlayer())
