@@ -21,7 +21,7 @@ def sumOf(dices, number):
     for i in range(5):
         if dices[i] == number:
             result += number
-    if result < 3:
+    if result < 3 * number:
         result = 0
     return result
 

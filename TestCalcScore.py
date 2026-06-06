@@ -1,5 +1,6 @@
 import unittest
-from CalcScore import calcScore, Ones, ThreeOfKind, FourOfKind, FullHouse, SmallStreet, BigStreet, Kniffel, Chance
+from CalcScore import calcScore, Ones, ThreeOfKind, FourOfKind, FullHouse, SmallStreet, BigStreet, Kniffel, Chance, \
+    Threes, Twos, Sixes
 
 
 class TestCalcScore(unittest.TestCase):
@@ -8,6 +9,10 @@ class TestCalcScore(unittest.TestCase):
         self.assertEqual(3, calcScore(Ones, [1, 2, 1, 3, 1]))
         self.assertEqual(0, calcScore(Ones, [1, 3, 1, 3, 2]))
         self.assertEqual(0, calcScore(Ones, [2, 3, 1, 3, 2]))
+        self.assertEqual(0, calcScore(Threes, [2, 3, 2, 3, 2]))
+        self.assertEqual(0, calcScore(Twos, [3, 2, 3, 2, 3]))
+        self.assertEqual(0, calcScore(Sixes, [6, 2, 3, 2, 3]))
+        self.assertEqual(9, calcScore(Threes, [3, 2, 3, 2, 3]))
 
     def testThreeOfAKind(self):
         self.assertEqual(17,calcScore(ThreeOfKind,[5, 5, 5, 1, 1]))
